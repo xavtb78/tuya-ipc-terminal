@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"net"
+	"strings"
 	"sync"
 	"time"
 
@@ -297,7 +298,7 @@ func (s *RTSPServer) findCamera(path string) (*storage.CameraInfo, *storage.User
 
 	// Find camera by RTSP path
 	for _, camera := range cameras {
-		if camera.RTSPPath == path {
+		if strings.EqualFold(camera.RTSPPath, path) {
 			// Get user for this camera
 			users, err := s.storageManager.ListUsers()
 			if err != nil {
